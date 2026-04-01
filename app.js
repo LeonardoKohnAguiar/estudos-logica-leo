@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const fs = require('fs'); // Novo módulo: File System (Sistema de Arquivos)
 
-// Nossa função de monitoramento "Engemon Style"
+// Função para monitorar a temperatura de um equipamento
 function monitorarEquipamento(nome, temperatura) {
     if (temperatura > 75) {
         console.log(chalk.bgWhite.red.bold(`🚨 ALERTA CRÍTICO: ${temperatura}°C - ${nome}`));
@@ -12,8 +12,6 @@ function monitorarEquipamento(nome, temperatura) {
     }
 }
 
-// ==========================================
-// A MÁGICA DO BACK-END: LENDO ARQUIVO EXTERNO
 // ==========================================
 console.log(chalk.magenta.bold("\n=== 📂 BUSCANDO DADOS DO ARQUIVO EXTERNO ==="));
 
