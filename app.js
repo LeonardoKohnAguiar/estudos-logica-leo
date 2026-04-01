@@ -1,38 +1,7 @@
-// Simulação de Nivel de Acesso (Active Directory)
-/*const usuario = "leonardo";
-const nivelPermissao = "admin"; // Tente mudar o user depois de testar
-
-if (nivelPermissao === "admin") {
-    console.log("Acesso concedido! Bem-vindo ao servidor principal. ");
-} else {
-    console.log("Acesso negado. Nivel de permissão insuficiente para  " + usuario)
-}*/
-
-// --------------------------------------------------------------------------------------------------------------------
-
-// Simulação de um Ativo Detalhado 
-/*const switchCore = {
-    nome: "Switch Core Alphaville",
-    marca: "Cisco",
-    portasOcupadas: 42,
-    totalPortas: 48,
-    status: "online"
-};
-
-console.log("--- Verificação de Ativo ---");
-console.log("Equipamento: " + switchCore.nome);
-
-// Lógica de capacidade 
-if (switchCore.portasOcupadas > 40) {
-    console.log("ALERTA: Poucas portas disponiveis neste switch!");
-} else {
-    console.log("Capacidade do Switch está estável.");
-}*/
-
-// --------------------------------------------------------------------------------------------------------------------
-
 const chalk = require('chalk');
+const fs = require('fs'); // Novo módulo: File System (Sistema de Arquivos)
 
+// Nossa função de monitoramento "Engemon Style"
 function monitorarEquipamento(nome, temperatura) {
     if (temperatura > 75) {
         console.log(chalk.bgWhite.red.bold(`🚨 ALERTA CRÍTICO: ${temperatura}°C - ${nome}`));
@@ -44,21 +13,19 @@ function monitorarEquipamento(nome, temperatura) {
 }
 
 // ==========================================
-// NOVO: Array de Objetos (Nosso "Banco de Dados" local)
+// A MÁGICA DO BACK-END: LENDO ARQUIVO EXTERNO
 // ==========================================
-const dataCenter = [
-    { equipamento: "Switch Core Alphaville", temp: 35 },
-    { equipamento: "Roteador BGP Piso 1", temp: 62 },
-    { equipamento: "Servidor de Banco de Dados", temp: 85 },
-    { equipamento: "Firewall Principal", temp: 45 },
-    { equipamento: "Nobreak Geral", temp: 78 }
-];
+console.log(chalk.magenta.bold("\n=== 📂 BUSCANDO DADOS DO ARQUIVO EXTERNO ==="));
 
-console.log(chalk.magenta.bold("\n=== 🔄 INICIANDO VARREDURA DO DATACENTER ==="));
+// 1. O Node.js vai no disco e lê o arquivo como se fosse um texto normal
+const dadosBrutos = fs.readFileSync('equipamentos.json', 'utf8');
 
-// O Loop Mágico: Para cada 'item' dentro de 'dataCenter', execute a função
+// 2. Transformamos o texto em Objetos que o JavaScript entende (Array de Objetos)
+const dataCenter = JSON.parse(dadosBrutos);
+
+// 3. O Loop trabalha normalmente com os dados que vieram de fora!
 dataCenter.forEach(item => {
-    monitorarEquipamento(item.equipamento, item.temp);
+    monitorarEquipamento(item.nome, item.temp);
 });
 
-console.log(chalk.magenta.bold("=== ✅ VARREDURA CONCLUÍDA ===\n"));
+console.log(chalk.magenta.bold("=== ✅ MONITORAMENTO CONCLUÍDO ===\n"));

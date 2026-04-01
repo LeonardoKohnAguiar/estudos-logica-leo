@@ -1,0 +1,8 @@
+[
+    { "nome": "Switch Core Alphaville", "temp": 35 },
+    { "nome": "Roteador BGP Piso 1", "temp": 62 },
+    { "nome": "Servidor de Banco de Dados", "temp": 85 },
+    { "nome": "Firewall Principal", "temp": 45 },
+    { "nome": "Nobreak Geral", "temp": 78 },
+    { "nome": "Storage de Backup", "temp": 92 }
+]
